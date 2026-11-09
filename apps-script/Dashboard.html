@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<base target="_top">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Manutenção de Equipamentos</title>
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #f5f4f1;
+    --surface-1: #fcfcfb;
+    --surface-2: #f0efec;
+    --border: #e2e1dc;
+    --grid: #ebeae6;
+    --text-primary: #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted: #77766f;
+    --accent: #2a78d6;
+    --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a; --s4: #eda100;
+    --s5: #e87ba4; --s6: #008300; --s7: #6250d6; --s8: #e34948;
+    --good: #0ca30c; --warning: #fab219; --serious: #ec835a; --critical: #d03b3b;
+    --neutral: #9a998f;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --bg: #111110; --surface-1: #1a1a19; --surface-2: #242422; --border: #33332f; --grid: #2a2a27;
+      --text-primary: #f0efec; --text-secondary: #c3c2b7; --text-muted: #8f8e85; --accent: #3987e5;
+      --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500;
+      --s5: #d55181; --s6: #008300; --s7: #9085e9; --s8: #e66767; --neutral: #6f6e66;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #111110; --surface-1: #1a1a19; --surface-2: #242422; --border: #33332f; --grid: #2a2a27;
+    --text-primary: #f0efec; --text-secondary: #c3c2b7; --text-muted: #8f8e85; --accent: #3987e5;
+    --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500;
+    --s5: #d55181; --s6: #008300; --s7: #9085e9; --s8: #e66767; --neutral: #6f6e66;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background: var(--bg); color: var(--text-primary);
+    font: 14px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 20px 16px 48px; }
+  header { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: flex-end; justify-content: space-between; margin-bottom: 16px; }
+  h1 { font-size: 22px; line-height: 1.2; margin: 0 0 4px; letter-spacing: -0.01em; }
+  .meta { color: var(--text-secondary); font-size: 13px; }
+  .meta a { color: var(--accent); }
+  .actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  button, select, input[type=search] {
+    font: inherit; color: var(--text-primary); background: var(--surface-1);
+    border: 1px solid var(--border); border-radius: 8px; padding: 7px 10px; min-height: 36px;
+  }
+  button { cursor: pointer; }
+  button.primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; padding: 7px 14px; }
+  button.primary[disabled] { opacity: .6; cursor: progress; }
+  button.seg { border-radius: 0; margin-left: -1px; }
+  button.seg:first-child { border-radius: 8px 0 0 8px; margin-left: 0; }
+  button.seg:last-child { border-radius: 0 8px 8px 0; }
+  button.seg[aria-pressed="true"] { background: var(--surface-2); font-weight: 600; }
+  .msg { font-size: 13px; color: var(--text-secondary); min-height: 1em; }
+  .msg.erro { color: var(--critical); }
+
+  .filtros { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: flex-end; margin: 0 0 16px; }
+  .filtros label { display: flex; flex-direction: column; gap: 3px; font-size: 12px; color: var(--text-secondary); }
+  .filtros label.check { flex-direction: row; align-items: center; gap: 6px; min-height: 36px; font-size: 13px; color: var(--text-primary); }
+
+  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin-bottom: 16px; }
+  .kpi { background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; }
+  .kpi .rot { font-size: 12px; color: var(--text-secondary); }
+  .kpi .val { font-size: 26px; font-weight: 650; letter-spacing: -0.02em; margin-top: 2px; font-variant-numeric: tabular-nums; }
+  .kpi .sub { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+  .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .card { background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px; padding: 16px; min-width: 0; }
+  .card.full { grid-column: 1 / -1; }
+  .card h2 { font-size: 15px; margin: 0; }
+  .card .desc { font-size: 12px; color: var(--text-secondary); margin: 2px 0 10px; }
+  .card-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; align-items: flex-start; margin-bottom: 6px; }
+  .chart-box { position: relative; height: 300px; }
+  .chart-box.tall { height: 340px; }
+  .loading .chart-box, .loading .kpis, .loading table { opacity: .45; transition: opacity .2s; }
+
+  .legenda { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12px; color: var(--text-secondary); margin: 4px 0 8px; }
+  .legenda span { display: inline-flex; align-items: center; gap: 6px; }
+  .legenda i { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+  .legenda i.linha { height: 3px; width: 14px; border-radius: 2px; }
+
+  .tabela-wrap { overflow: auto; max-height: 520px; border-top: 1px solid var(--border); }
+  table { border-collapse: collapse; width: 100%; font-size: 13px; }
+  th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--grid); white-space: nowrap; }
+  th { position: sticky; top: 0; background: var(--surface-1); color: var(--text-secondary); font-weight: 600; font-size: 12px; z-index: 1; }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  td.quebra { white-space: normal; min-width: 160px; max-width: 320px; }
+  td { vertical-align: top; }
+  .card.oculto { display: none; }
+  tr:hover td { background: var(--surface-2); }
+
+  .sit { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; }
+  .sit svg { width: 14px; height: 14px; flex: none; }
+  .barra { position: relative; height: 6px; width: 90px; background: var(--surface-2); border-radius: 3px; overflow: hidden; display: inline-block; vertical-align: middle; margin-right: 6px; }
+  .barra b { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 3px; }
+  .muted { color: var(--text-muted); }
+  .vazio { color: var(--text-muted); padding: 24px 0; text-align: center; }
+
+  @media (max-width: 860px) {
+    .grid { grid-template-columns: minmax(0, 1fr); }
+    .chart-box { height: 260px; }
+    h1 { font-size: 19px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap" id="app">
+  <header>
+    <div>
+      <h1>Manutenção de equipamentos</h1>
+      <div class="meta" id="meta">Carregando…</div>
+    </div>
+    <div class="actions">
+      <span class="msg" id="msg" role="status" aria-live="polite"></span>
+      <button class="primary" id="btnAtualizar" type="button">Atualizar planilhas</button>
+    </div>
+  </header>
+
+  <div class="filtros" role="group" aria-label="Filtros">
+    <label>Período
+      <select id="fPeriodo">
+        <option value="12">Últimos 12 meses</option>
+        <option value="24">Últimos 24 meses</option>
+        <option value="60">Últimos 5 anos</option>
+        <option value="0" selected>Tudo</option>
+      </select>
+    </label>
+    <label>Categoria <select id="fCategoria"></select></label>
+    <label>Equipamento <select id="fEquip"></select></label>
+    <label>Componente <select id="fGrupo"></select></label>
+    <label>Natureza <select id="fNatureza"></select></label>
+    <label class="check"><input type="checkbox" id="fAnterior"> Incluir dono anterior</label>
+  </div>
+
+  <section class="kpis" id="kpis" aria-label="Indicadores"></section>
+
+  <div class="grid">
+    <section class="card full">
+      <div class="card-head">
+        <div>
+          <h2>Linha do tempo das manutenções</h2>
+          <p class="desc">Cada ponto é um grupo de serviços feito numa visita. Passe o mouse para ver os itens.</p>
+        </div>
+      </div>
+      <div class="legenda" id="legTimeline"></div>
+      <div class="chart-box tall"><canvas id="cTimeline" aria-label="Linha do tempo de manutenções por equipamento"></canvas></div>
+    </section>
+
+    <section class="card full">
+      <div class="card-head">
+        <div>
+          <h2 id="tBarras">Manutenções por período</h2>
+          <p class="desc">Itens de manutenção agrupados por mês ou ano.</p>
+        </div>
+        <div class="actions">
+          <span role="group" aria-label="Granularidade">
+            <button class="seg" data-gran="mes" aria-pressed="false" type="button">Mês</button><button class="seg" data-gran="ano" aria-pressed="true" type="button">Ano</button>
+          </span>
+          <span role="group" aria-label="Métrica">
+            <button class="seg" data-met="qtd" aria-pressed="true" type="button">Quantidade</button><button class="seg" data-met="custo" aria-pressed="false" type="button">Custo</button>
+          </span>
+          <span role="group" aria-label="Empilhar por">
+            <button class="seg" data-stack="grupo" aria-pressed="true" type="button">Componente</button><button class="seg" data-stack="equip" aria-pressed="false" type="button">Equipamento</button>
+          </span>
+        </div>
+      </div>
+      <div class="legenda" id="legBarras"></div>
+      <div class="chart-box"><canvas id="cBarras" aria-label="Manutenções por período"></canvas></div>
+      <p class="desc" id="notaCusto"></p>
+    </section>
+
+    <section class="card full">
+      <div class="card-head">
+        <div>
+          <h2>Situação por componente</h2>
+          <p class="desc">Comparação com o plano de manutenção (aba <code>plano_manutencao</code>). O percentual é o maior entre km e dias decorridos.</p>
+        </div>
+      </div>
+      <div class="tabela-wrap"><table id="tStatus"></table></div>
+    </section>
+
+    <section class="card" id="cardKm">
+      <div class="card-head">
+        <div>
+          <h2>Quilometragem × manutenções</h2>
+          <p class="desc" id="descKm">Km acumulado; os pontos marcam as manutenções.</p>
+        </div>
+        <label class="filtros" style="margin:0"><select id="selKm" aria-label="Equipamento"></select></label>
+      </div>
+      <div class="legenda" id="legKm"></div>
+      <div class="chart-box"><canvas id="cKm" aria-label="Quilometragem acumulada e manutenções"></canvas></div>
+    </section>
+
+    <section class="card" id="cardUso">
+      <div class="card-head">
+        <div>
+          <h2>Km por mês</h2>
+          <p class="desc" id="descUso">Uso registrado no Strava.</p>
+        </div>
+      </div>
+      <div class="chart-box"><canvas id="cUso" aria-label="Quilômetros por mês"></canvas></div>
+    </section>
+
+    <section class="card full">
+      <div class="card-head">
+        <div>
+          <h2>Vida útil dos tênis</h2>
+          <p class="desc">Km acumulado desde a primeira atividade registrada. A linha tracejada é a vida útil de referência (<code>vida_util_km</code>).</p>
+        </div>
+      </div>
+      <div class="legenda" id="legTenis"></div>
+      <div class="chart-box"><canvas id="cTenis" aria-label="Quilometragem acumulada dos tênis"></canvas></div>
+    </section>
+
+    <section class="card full">
+      <div class="card-head">
+        <div>
+          <h2>Todas as manutenções</h2>
+          <p class="desc" id="descTabela"></p>
+        </div>
+        <input type="search" id="busca" placeholder="Buscar serviço, equipamento, observação…" aria-label="Buscar" style="min-width:260px">
+      </div>
+      <div class="tabela-wrap"><table id="tDetalhe"></table></div>
+    </section>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  var GRUPOS = ['Motor', 'Transmissão', 'Pneus e rodas', 'Suspensão', 'Freios', 'Elétrica e combustível', 'Revisão geral', 'Outros'];
+  var MESES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
+  var DADOS = null, charts = {};
+  var ui = { gran: 'ano', met: 'qtd', stack: 'grupo' };
+
+  /* ---------- utilitários ---------- */
+  function $(id) { return document.getElementById(id); }
+  function css(v) { return getComputedStyle(document.documentElement).getPropertyValue(v).trim(); }
+  function serieCor(i) { return css('--s' + ((i % 8) + 1)); }
+  function ts(iso) { var p = iso.split('-'); return Date.UTC(+p[0], p[1] - 1, +(p[2] || 1)); }
+  function fmtData(iso) { if (!iso) return '—'; var p = iso.split('-'); return p[2] + '/' + p[1] + '/' + p[0]; }
+  function fmtMes(ym) { var p = ym.split('-'); return MESES[+p[1] - 1] + '/' + p[0].slice(2); }
+  var nf0 = new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 0 });
+  var nf1 = new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 1 });
+  var brl = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 });
+  function fmtKm(v) { return v == null || v === '' || isNaN(v) ? '—' : nf0.format(v) + ' km'; }
+  function hojeIso() { var d = new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+  function el(tag, attrs, kids) {
+    var e = document.createElement(tag);
+    if (attrs) Object.keys(attrs).forEach(function (k) {
+      if (k === 'text') e.textContent = attrs[k]; else if (k === 'class') e.className = attrs[k]; else e.setAttribute(k, attrs[k]);
+    });
+    (kids || []).forEach(function (c) { if (c != null) e.appendChild(typeof c === 'string' ? document.createTextNode(c) : c); });
+    return e;
+  }
+  function opcoes(sel, valores, todos) {
+    var atual = sel.value; sel.textContent = '';
+    sel.appendChild(el('option', { value: '', text: todos }));
+    valores.forEach(function (v) { sel.appendChild(el('option', { value: v[0], text: v[1] })); });
+    if (valores.some(function (v) { return v[0] === atual; })) sel.value = atual;
+  }
+
+  /* ---------- tema do Chart.js ---------- */
+  function temaChart() {
+    Chart.defaults.font.family = 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif';
+    Chart.defaults.font.size = 12;
+    Chart.defaults.color = css('--text-secondary');
+    Chart.defaults.borderColor = css('--grid');
+    var tt = Chart.defaults.plugins.tooltip;
+    tt.backgroundColor = css('--surface-1'); tt.titleColor = css('--text-secondary'); tt.bodyColor = css('--text-primary');
+    tt.borderColor = css('--border'); tt.borderWidth = 1; tt.padding = 10; tt.cornerRadius = 8;
+    tt.boxWidth = 12; tt.boxHeight = 3; tt.usePointStyle = false; tt.bodyFont = { weight: '600' };
+    Chart.defaults.plugins.legend.display = false;
+    Chart.defaults.maintainAspectRatio = false;
+    Chart.defaults.animation = { duration: 250 };
+  }
+  function eixoTempo(min, max) {
+    return {
+      type: 'linear', min: min, max: max,
+      grid: { color: css('--grid') }, border: { display: false },
+      ticks: {
+        maxTicksLimit: 8,
+        callback: function (v) { var d = new Date(v); return MESES[d.getUTCMonth()] + '/' + String(d.getUTCFullYear()).slice(2); }
+      }
+    };
+  }
+  function desenhar(id, cfg) {
+    if (charts[id]) charts[id].destroy();
+    charts[id] = new Chart($(id), cfg);
+  }
+  function legenda(id, itens, tipo) {
+    var box = $(id); box.textContent = '';
+    itens.forEach(function (it) {
+      box.appendChild(el('span', null, [el('i', { class: tipo === 'linha' ? 'linha' : '', style: 'background:' + it[1] + (it[2] ? ';background-image:repeating-linear-gradient(90deg,' + it[1] + ' 0 4px,transparent 4px 7px);background-color:transparent' : '') }), it[0]]));
+    });
+  }
+
+  /* ---------- filtros ---------- */
+  function equipPorId(id) { return DADOS.equipamentos.find(function (e) { return e.equip_id === id; }); }
+  function filtradas() {
+    var meses = +$('fPeriodo').value, cat = $('fCategoria').value, eq = $('fEquip').value,
+      gr = $('fGrupo').value, nat = $('fNatureza').value, ant = $('fAnterior').checked;
+    var corte = null;
+    if (meses) { var d = new Date(); d.setMonth(d.getMonth() - meses); corte = d.toISOString().slice(0, 10); }
+    return DADOS.manutencoes.filter(function (m) {
+      return (!corte || m.data >= corte) && (!cat || m.categoria === cat) && (!eq || m.equip_id === eq) &&
+        (!gr || m.grupo === gr) && (!nat || m.natureza === nat) && (ant || m.periodo_posse !== 'Dono anterior');
+    });
+  }
+
+  function montarFiltros() {
+    var cats = {}, eqs = {}, nats = {};
+    DADOS.manutencoes.forEach(function (m) { cats[m.categoria] = 1; eqs[m.equip_id] = m.nome_equipamento; nats[m.natureza] = 1; });
+    opcoes($('fCategoria'), Object.keys(cats).sort().map(function (c) { return [c, c]; }), 'Todas');
+    opcoes($('fEquip'), Object.keys(eqs).sort(function (a, b) { return eqs[a].localeCompare(eqs[b]); }).map(function (k) { return [k, eqs[k]]; }), 'Todos');
+    opcoes($('fGrupo'), GRUPOS.filter(function (g) { return DADOS.manutencoes.some(function (m) { return m.grupo === g; }); }).map(function (g) { return [g, g]; }), 'Todos');
+    opcoes($('fNatureza'), Object.keys(nats).sort().map(function (n) { return [n, n]; }), 'Todas');
+
+    var comKm = DADOS.equipamentos.filter(function (e) { return e.rastrear === 'S' && e.km_atual && e.categoria !== 'Calçado'; })
+      .sort(function (a, b) { return (a.categoria === 'Bicicleta' ? 0 : 1) - (b.categoria === 'Bicicleta' ? 0 : 1); });
+    var sel = $('selKm'), atual = sel.value; sel.textContent = '';
+    comKm.forEach(function (e) { sel.appendChild(el('option', { value: e.equip_id, text: e.nome })); });
+    if (comKm.some(function (e) { return e.equip_id === atual; })) sel.value = atual;
+  }
+
+  /* ---------- KPIs ---------- */
+  function kpis(ms) {
+    var eventos = {}, custo = 0, comValor = 0, ultima = null;
+    ms.forEach(function (m) {
+      eventos[m.evento_id] = 1;
+      if (m.custo !== '' && m.custo != null) { custo += +m.custo; comValor++; }
+      if (!ultima || m.data > ultima.data) ultima = m;
+    });
+    var st = DADOS.status, venc = st.filter(function (s) { return s.situacao === 'Vencido'; }).length,
+      aten = st.filter(function (s) { return s.situacao === 'Atenção'; }).length;
+    var box = $('kpis'); box.textContent = '';
+    function kpi(rot, val, sub) { box.appendChild(el('div', { class: 'kpi' }, [el('div', { class: 'rot', text: rot }), el('div', { class: 'val', text: val }), el('div', { class: 'sub', text: sub })])); }
+    kpi('Visitas de manutenção', nf0.format(Object.keys(eventos).length), nf0.format(ms.length) + ' itens de serviço');
+    kpi('Custo registrado', brl.format(custo), ms.length ? Math.round(100 * comValor / ms.length) + '% dos itens com valor' : '—');
+    kpi('Última manutenção', ultima ? fmtData(ultima.data) : '—', ultima ? ultima.nome_equipamento + ' · ' + ultima.servico : '');
+    kpi('Componentes vencidos', nf0.format(venc), nf0.format(aten) + ' em atenção · plano atual');
+  }
+
+  /* ---------- linha do tempo ---------- */
+  function timeline(ms) {
+    var equipIds = [];
+    ms.forEach(function (m) { if (equipIds.indexOf(m.equip_id) < 0) equipIds.push(m.equip_id); });
+    // ordena: veículos, bicicletas, depois o resto
+    var ordemCat = { 'Veículo': 0, 'Bicicleta': 1, 'Calçado': 2 };
+    equipIds.sort(function (a, b) {
+      var ea = equipPorId(a), eb = equipPorId(b);
+      return ((ordemCat[ea.categoria] != null ? ordemCat[ea.categoria] : 9) - (ordemCat[eb.categoria] != null ? ordemCat[eb.categoria] : 9)) || ea.nome.localeCompare(eb.nome);
+    });
+    var pts = {};
+    ms.forEach(function (m) {
+      var k = m.evento_id + '|' + m.grupo;
+      var p = pts[k] || (pts[k] = { m: m, itens: [], custo: 0 });
+      p.itens.push(m.servico + (m.descricao_original && m.descricao_original !== m.servico ? ' (' + m.descricao_original + ')' : ''));
+      if (m.custo) p.custo += +m.custo;
+    });
+    var gruposUsados = GRUPOS.filter(function (g) { return ms.some(function (m) { return m.grupo === g; }); });
+    var datasets = GRUPOS.map(function (g, gi) {
+      var off = (gi - 3.5) * 0.07;
+      return {
+        label: g, grupo: g,
+        data: Object.keys(pts).filter(function (k) { return pts[k].m.grupo === g; }).map(function (k) {
+          var p = pts[k];
+          return { x: ts(p.m.data), y: equipIds.indexOf(p.m.equip_id) + off, p: p };
+        }),
+        backgroundColor: serieCor(gi), borderColor: css('--surface-1'), borderWidth: 2,
+        pointRadius: 5.5, pointHoverRadius: 8, pointHitRadius: 10
+      };
+    }).filter(function (d) { return d.data.length; });
+    legenda('legTimeline', gruposUsados.map(function (g) { return [g, serieCor(GRUPOS.indexOf(g))]; }));
+    var xs = ms.map(function (m) { return ts(m.data); });
+    var pad = 45 * 86400000;
+    $('cTimeline').parentNode.style.height = Math.max(220, 70 + equipIds.length * 46) + 'px';
+    desenhar('cTimeline', {
+      type: 'scatter',
+      data: { datasets: datasets },
+      options: {
+        scales: {
+          x: eixoTempo(xs.length ? Math.min.apply(null, xs) - pad : undefined, xs.length ? Math.max.apply(null, xs) + pad : undefined),
+          y: {
+            min: -0.6, max: equipIds.length - 0.4, reverse: true, grid: { color: css('--grid') }, border: { display: false },
+            afterBuildTicks: function (ax) { ax.ticks = equipIds.map(function (_, i) { return { value: i }; }); },
+            ticks: { callback: function (v) { var e = equipPorId(equipIds[v]); return e ? e.nome : ''; }, color: css('--text-primary') }
+          }
+        },
+        plugins: {
+          tooltip: {
+            callbacks: {
+              title: function (c) { var p = c[0].raw.p; return p.m.nome_equipamento + ' · ' + fmtData(p.m.data) + (p.m.km_no_evento ? ' · ' + fmtKm(p.m.km_no_evento) : ''); },
+              label: function (c) { return c.dataset.label + (c.raw.p.custo ? ' · ' + brl.format(c.raw.p.custo) : ''); },
+              afterLabel: function (c) { return c.raw.p.itens.map(function (i) { return '  • ' + i; }); }
+            }
+          }
+        }
+      }
+    });
+  }
+
+  /* ---------- barras empilhadas ---------- */
+  function barras(ms) {
+    var chave = function (m) { return ui.gran === 'mes' ? m.data.slice(0, 7) : m.data.slice(0, 4); };
+    var periodos = {};
+    ms.forEach(function (m) { periodos[chave(m)] = 1; });
+    var labels = Object.keys(periodos).sort();
+    if (ui.gran === 'mes' && labels.length) { // preenche meses vazios
+      var cheio = [], p = labels[0].split('-'), y = +p[0], mo = +p[1], fim = labels[labels.length - 1];
+      while (true) { var k = y + '-' + String(mo).padStart(2, '0'); cheio.push(k); if (k >= fim) break; mo++; if (mo > 12) { mo = 1; y++; } }
+      labels = cheio;
+    }
+    var series;
+    if (ui.stack === 'grupo') series = GRUPOS.map(function (g, i) { return { nome: g, cor: serieCor(i), f: function (m) { return m.grupo === g; } }; });
+    else {
+      var cont = {};
+      ms.forEach(function (m) { cont[m.equip_id] = (cont[m.equip_id] || 0) + 1; });
+      var top = Object.keys(cont).sort(function (a, b) { return cont[b] - cont[a]; });
+      var principais = top.slice(0, top.length > 8 ? 7 : 8);
+      // cor segue o equipamento (ordem fixa por id), nunca o ranking
+      var fixos = DADOS.equipamentos.filter(function (e) { return e.rastrear === 'S'; }).map(function (e) { return e.equip_id; });
+      series = principais.map(function (id) {
+        var e = equipPorId(id); return { nome: e.nome, cor: serieCor(fixos.indexOf(id) >= 0 ? fixos.indexOf(id) : 7), f: function (m) { return m.equip_id === id; } };
+      });
+      if (top.length > principais.length) series.push({ nome: 'Outros', cor: css('--neutral'), f: function (m) { return principais.indexOf(m.equip_id) < 0; } });
+    }
+    var datasets = series.map(function (s) {
+      var vals = labels.map(function () { return 0; });
+      ms.forEach(function (m) {
+        if (!s.f(m)) return;
+        var i = labels.indexOf(chave(m));
+        vals[i] += ui.met === 'custo' ? (+m.custo || 0) : 1;
+      });
+      return { label: s.nome, data: vals, backgroundColor: s.cor, borderColor: css('--surface-1'), borderWidth: { top: 2 }, borderSkipped: false, borderRadius: 2, maxBarThickness: 48 };
+    }).filter(function (d) { return d.data.some(Boolean); });
+    legenda('legBarras', datasets.map(function (d) { return [d.label, d.backgroundColor]; }));
+    $('tBarras').textContent = (ui.met === 'custo' ? 'Custo de manutenção' : 'Itens de manutenção') + ' por ' + (ui.gran === 'mes' ? 'mês' : 'ano');
+    var semValor = ms.filter(function (m) { return m.custo === '' || m.custo == null; }).length;
+    $('notaCusto').textContent = ui.met === 'custo' && semValor ? semValor + ' de ' + ms.length + ' itens não têm valor registrado na planilha; o custo real é maior que o mostrado.' : '';
+    desenhar('cBarras', {
+      type: 'bar',
+      data: { labels: labels.map(function (l) { return ui.gran === 'mes' ? fmtMes(l) : l; }), datasets: datasets },
+      options: {
+        scales: {
+          x: { stacked: true, grid: { display: false }, border: { color: css('--border') }, ticks: { autoSkip: true, maxRotation: 0 } },
+          y: { stacked: true, grid: { color: css('--grid') }, border: { display: false }, ticks: { precision: 0, callback: function (v) { return ui.met === 'custo' ? brl.format(v) : nf0.format(v); } } }
+        },
+        plugins: {
+          tooltip: {
+            mode: 'index', intersect: false, itemSort: function (a, b) { return b.raw - a.raw; },
+            filter: function (c) { return c.raw > 0; },
+            callbacks: {
+              label: function (c) { return (ui.met === 'custo' ? brl.format(c.raw) : nf0.format(c.raw)) + '  ' + c.dataset.label; },
+              footer: function (cs) { var t = cs.reduce(function (s, c) { return s + c.raw; }, 0); return 'Total: ' + (ui.met === 'custo' ? brl.format(t) : nf0.format(t)); }
+            }
+          }
+        }
+      }
+    });
+  }
+
+  /* ---------- status ---------- */
+  var ICONES = {
+    'Vencido': ['--critical', '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="currentColor"/><path d="M8 4v5M8 11.2v.6" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>'],
+    'Atenção': ['--serious', '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5 15 14H1z" fill="currentColor"/><path d="M8 6v4M8 12v.4" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg>'],
+    'OK': ['--good', '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="currentColor"/><path d="m4.8 8.2 2.1 2.1 4.3-4.4" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>'],
+    'Sem registro': ['--neutral', '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-dasharray="2.5 2"/></svg>'],
+    'Sem km': ['--neutral', '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.2" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>']
+  };
+  function tabelaStatus() {
+    var eq = $('fEquip').value, cat = $('fCategoria').value;
+    var linhas = DADOS.status.filter(function (s) { var e = equipPorId(s.equip_id); return (!eq || s.equip_id === eq) && (!cat || e.categoria === cat); });
+    var t = $('tStatus'); t.textContent = '';
+    var cab = ['Situação', 'Equipamento', 'Componente', 'Última', 'Km desde', 'Dias desde', 'Intervalo', 'Uso do intervalo', 'Próxima (previsão)'];
+    t.appendChild(el('thead', null, [el('tr', null, cab.map(function (c, i) { return el('th', { text: c, class: i >= 4 && i <= 6 ? 'num' : '' }); }))]));
+    var tb = el('tbody');
+    if (!linhas.length) tb.appendChild(el('tr', null, [el('td', { colspan: cab.length, class: 'vazio', text: 'Nenhum componente no plano para este filtro.' })]));
+    linhas.forEach(function (s) {
+      var ic = ICONES[s.situacao] || ICONES['Sem km'];
+      var sit = el('span', { class: 'sit', style: 'color:' + css(ic[0]) });
+      sit.innerHTML = ic[1]; sit.appendChild(el('span', { text: s.situacao, style: 'color:var(--text-primary)' }));
+      var e = equipPorId(s.equip_id), ka = e && e.km_atual;
+      var kmDesde = s.km_desde != null ? fmtKm(s.km_desde) + (ka && ka.estimado ? '*' : '') : '—';
+      var intervalo = [s.intervalo_km ? nf0.format(s.intervalo_km) + ' km' : null, s.intervalo_dias ? nf0.format(s.intervalo_dias) + ' d' : null].filter(Boolean).join(' / ');
+      var uso = el('td');
+      if (s.pct != null) {
+        var pct = Math.min(s.pct, 1);
+        uso.appendChild(el('span', { class: 'barra' }, [el('b', { style: 'width:' + Math.round(pct * 100) + '%;background:' + css(ic[0]) })]));
+        uso.appendChild(document.createTextNode(nf0.format(s.pct * 100) + '%'));
+      } else uso.textContent = '—';
+      var prox = [s.proxima_data ? fmtData(s.proxima_data) : null, s.proximo_km ? fmtKm(s.proximo_km) : null].filter(Boolean).join(' ou ') || '—';
+      tb.appendChild(el('tr', null, [
+        el('td', null, [sit]), el('td', { text: s.equipamento }), el('td', { text: s.componente }),
+        el('td', { text: fmtData(s.ultima_data) }), el('td', { class: 'num', text: kmDesde }),
+        el('td', { class: 'num', text: s.dias_desde != null ? nf0.format(s.dias_desde) : '—' }),
+        el('td', { class: 'num', text: intervalo || '—' }), uso, el('td', { text: prox })
+      ]));
+    });
+    t.appendChild(tb);
+  }
+
+  /* ---------- quilometragem × manutenções ---------- */
+  function serieKm(id) {
+    var e = equipPorId(id), serie = [];
+    if (e.fonte_km === 'strava') {
+      var acum = 0;
+      DADOS.uso_mensal.filter(function (u) { return u[0] === id; }).sort(function (a, b) { return a[1] < b[1] ? -1 : 1; })
+        .forEach(function (u) {
+          acum += u[2];
+          var p = u[1].split('-'), fimMes = Date.UTC(+p[0], +p[1], 0);
+          serie.push({ x: fimMes, y: Math.round(acum) });
+        });
+    } else {
+      DADOS.hodometro.filter(function (h) { return h[0] === id; }).forEach(function (h) { serie.push({ x: ts(h[1]), y: h[2] }); });
+      serie.sort(function (a, b) { return a.x - b.x; });
+    }
+    return serie;
+  }
+  function graficoKm() {
+    var id = $('selKm').value; if (!id) return;
+    var e = equipPorId(id), serie = serieKm(id), ant = $('fAnterior').checked;
+    var ms = DADOS.manutencoes.filter(function (m) { return m.equip_id === id && m.km_no_evento !== '' && m.km_no_evento != null && (ant || m.periodo_posse !== 'Dono anterior'); });
+    var ev = {};
+    ms.forEach(function (m) { var p = ev[m.evento_id] || (ev[m.evento_id] = { x: ts(m.data), y: +m.km_no_evento, itens: [], data: m.data }); p.itens.push(m.servico); });
+    var pontos = Object.keys(ev).map(function (k) { return ev[k]; });
+    var ka = e.km_atual;
+    $('descKm').textContent = (e.fonte_km === 'strava' ? 'Km acumulado no Strava' : 'Leituras de hodômetro (planilha km total e km informado nas manutenções)') +
+      '; os pontos marcam as manutenções.' + (ka ? ' Atual: ' + fmtKm(ka.km) + (ka.estimado ? ' (estimado; última leitura ' + fmtKm(ka.km_leitura) + ' em ' + fmtData(ka.data) + ')' : '') + '.' : '');
+    legenda('legKm', [[e.fonte_km === 'strava' ? 'Km acumulado' : 'Hodômetro', css('--s1')], ['Manutenção', css('--s2')]], 'linha');
+    var xs = serie.map(function (p) { return p.x; }).concat(pontos.map(function (p) { return p.x; }));
+    desenhar('cKm', {
+      type: 'line',
+      data: {
+        datasets: [
+          { label: e.fonte_km === 'strava' ? 'Km acumulado' : 'Hodômetro', data: serie, borderColor: css('--s1'), backgroundColor: css('--s1'), borderWidth: 2, pointRadius: e.fonte_km === 'strava' ? 0 : 3, pointHitRadius: 8, tension: 0, order: 2 },
+          { type: 'scatter', label: 'Manutenção', data: pontos, backgroundColor: css('--s2'), borderColor: css('--surface-1'), borderWidth: 2, pointRadius: 6, pointHoverRadius: 8, pointHitRadius: 10, order: 1 }
+        ]
+      },
+      options: {
+        interaction: { mode: 'nearest', intersect: false },
+        scales: {
+          x: eixoTempo(xs.length ? Math.min.apply(null, xs) : undefined, xs.length ? Math.max.apply(null, xs) : undefined),
+          y: { grid: { color: css('--grid') }, border: { display: false }, ticks: { callback: function (v) { return nf0.format(v); } } }
+        },
+        plugins: {
+          tooltip: {
+            callbacks: {
+              title: function (c) { var r = c[0].raw; return r.data ? fmtData(r.data) : (function (d) { return MESES[d.getUTCMonth()] + '/' + d.getUTCFullYear(); })(new Date(r.x)); },
+              label: function (c) { return fmtKm(c.raw.y) + '  ' + c.dataset.label; },
+              afterLabel: function (c) { return c.raw.itens ? c.raw.itens.map(function (i) { return '  • ' + i; }) : ''; }
+            }
+          }
+        }
+      }
+    });
+    graficoUso(id);
+  }
+
+  function graficoUso(id) {
+    var e = equipPorId(id), semStrava = e.fonte_km !== 'strava';
+    // sem Strava (moto/carro): esconde o card de km/mês e o gráfico de km ocupa a linha toda
+    $('cardUso').classList.toggle('oculto', semStrava);
+    $('cardKm').classList.toggle('full', semStrava);
+    if (semStrava) { if (charts.cUso) { charts.cUso.destroy(); delete charts.cUso; } return; }
+    var linhas = DADOS.uso_mensal.filter(function (u) { return u[0] === id; }).sort(function (a, b) { return a[1] < b[1] ? -1 : 1; }).slice(-36);
+    $('descUso').textContent = e.nome + ' — últimos ' + linhas.length + ' meses com atividade no Strava.';
+    desenhar('cUso', {
+      type: 'bar',
+      data: { labels: linhas.map(function (u) { return fmtMes(u[1]); }), datasets: [{ label: 'Km no mês', data: linhas.map(function (u) { return u[2]; }), backgroundColor: css('--s1'), borderRadius: { topLeft: 4, topRight: 4 }, borderSkipped: 'bottom', maxBarThickness: 28 }] },
+      options: {
+        scales: {
+          x: { grid: { display: false }, border: { color: css('--border') }, ticks: { autoSkip: true, maxRotation: 0 } },
+          y: { grid: { color: css('--grid') }, border: { display: false }, ticks: { callback: function (v) { return nf0.format(v); } } }
+        },
+        plugins: { tooltip: { callbacks: { label: function (c) { return nf1.format(c.raw) + ' km'; } } } }
+      }
+    });
+  }
+
+  /* ---------- tênis ---------- */
+  function graficoTenis() {
+    var tenis = DADOS.tenis.filter(function (t) { return t.serie.length; });
+    var datasets = tenis.map(function (t, i) {
+      return { label: t.nome, data: t.serie.map(function (p) { return { x: ts(p[0]), y: p[1] }; }), borderColor: serieCor(i), backgroundColor: serieCor(i), borderWidth: 2, pointRadius: 0, pointHitRadius: 6, stepped: false, tension: 0 };
+    });
+    var ref = tenis.map(function (t) { return t.vida_util_km; }).filter(Boolean)[0];
+    var xs = [];
+    datasets.forEach(function (d) { d.data.forEach(function (p) { xs.push(p.x); }); });
+    if (ref && xs.length) datasets.push({ label: 'Vida útil (' + nf0.format(ref) + ' km)', data: [{ x: Math.min.apply(null, xs), y: ref }, { x: Math.max.apply(null, xs), y: ref }], borderColor: css('--neutral'), borderDash: [5, 4], borderWidth: 1.5, pointRadius: 0, pointHitRadius: 0 });
+    legenda('legTenis', tenis.map(function (t, i) {
+      var ult = t.serie[t.serie.length - 1][1];
+      return [t.nome + ' · ' + fmtKm(ult), serieCor(i)];
+    }).concat(ref ? [['Vida útil de referência', css('--neutral'), true]] : []), 'linha');
+    desenhar('cTenis', {
+      type: 'line', data: { datasets: datasets },
+      options: {
+        interaction: { mode: 'nearest', intersect: false, axis: 'x' },
+        scales: {
+          x: eixoTempo(xs.length ? Math.min.apply(null, xs) : undefined, xs.length ? Math.max.apply(null, xs) : undefined),
+          y: { beginAtZero: true, grid: { color: css('--grid') }, border: { display: false }, ticks: { callback: function (v) { return nf0.format(v); } } }
+        },
+        plugins: {
+          tooltip: {
+            filter: function (c) { return c.datasetIndex < tenis.length; },
+            callbacks: {
+              title: function (c) { var d = new Date(c[0].raw.x); return String(d.getUTCDate()).padStart(2, '0') + '/' + String(d.getUTCMonth() + 1).padStart(2, '0') + '/' + d.getUTCFullYear(); },
+              label: function (c) { return fmtKm(c.raw.y) + '  ' + c.dataset.label; }
+            }
+          }
+        }
+      }
+    });
+  }
+
+  /* ---------- tabela detalhada ---------- */
+  function tabelaDetalhe(ms) {
+    var q = $('busca').value.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+    var linhas = ms.filter(function (m) {
+      if (!q) return true;
+      return [m.nome_equipamento, m.servico, m.componente, m.descricao_original, m.observacao, m.natureza].join(' ').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').indexOf(q) >= 0;
+    }).slice().sort(function (a, b) { return a.data < b.data ? 1 : a.data > b.data ? -1 : 0; });
+    $('descTabela').textContent = nf0.format(linhas.length) + ' itens. Linha = número da linha na planilha "Manutenções equipamentos".';
+    var t = $('tDetalhe'); t.textContent = '';
+    var cab = [['Data'], ['Equipamento'], ['Serviço'], ['Componente'], ['Natureza'], ['Km', 'num'], ['Custo', 'num'], ['Texto original'], ['Observação'], ['Posse'], ['Linha', 'num']];
+    t.appendChild(el('thead', null, [el('tr', null, cab.map(function (c) { return el('th', { text: c[0], class: c[1] || '' }); }))]));
+    var tb = el('tbody');
+    if (!linhas.length) tb.appendChild(el('tr', null, [el('td', { colspan: cab.length, class: 'vazio', text: 'Nenhuma manutenção encontrada.' })]));
+    linhas.forEach(function (m) {
+      tb.appendChild(el('tr', null, [
+        el('td', { text: fmtData(m.data) }), el('td', { text: m.nome_equipamento }), el('td', { text: m.servico }),
+        el('td', { text: m.componente }), el('td', { text: m.natureza }),
+        el('td', { class: 'num', text: m.km_no_evento !== '' && m.km_no_evento != null ? nf0.format(m.km_no_evento) : '—' }),
+        el('td', { class: 'num', text: m.custo !== '' && m.custo != null ? brl.format(m.custo) : '—' }),
+        el('td', { class: 'quebra', text: m.descricao_original }), el('td', { class: 'quebra muted', text: m.observacao || '' }),
+        el('td', { text: m.periodo_posse }), el('td', { class: 'num muted', text: m.linha_origem })
+      ]));
+    });
+    t.appendChild(tb);
+  }
+
+  /* ---------- render ---------- */
+  function render() {
+    if (!DADOS) return;
+    temaChart();
+    var ms = filtradas();
+    kpis(ms); timeline(ms); barras(ms); tabelaStatus(); graficoKm(); graficoTenis(); tabelaDetalhe(ms);
+  }
+
+  function carregarDados(json) {
+    DADOS = typeof json === 'string' ? JSON.parse(json) : json;
+    var meta = $('meta'); meta.textContent = '';
+    meta.appendChild(document.createTextNode('Última atualização: ' + (DADOS.ultima_atualizacao || 'nunca') + ' · '));
+    if (DADOS.planilha_url) meta.appendChild(el('a', { href: DADOS.planilha_url, target: '_blank', rel: 'noopener', text: 'abrir planilha de dados' }));
+    if (DADOS.pendencias) meta.appendChild(document.createTextNode(' · ' + DADOS.pendencias + ' pendência(s) na aba "pendencias"'));
+    montarFiltros();
+    render();
+    $('app').classList.remove('loading');
+  }
+
+  function erro(e) {
+    $('app').classList.remove('loading');
+    var m = $('msg'); m.className = 'msg erro'; m.textContent = 'Erro: ' + (e && e.message ? e.message : e);
+    $('btnAtualizar').disabled = false;
+  }
+
+  function buscar() {
+    $('app').classList.add('loading');
+    if (window.google && google.script && google.script.run) {
+      google.script.run.withSuccessHandler(carregarDados).withFailureHandler(erro).getDashboardData();
+    } else if (window.__MOCK__) {
+      setTimeout(function () { carregarDados(window.__MOCK__); }, 50);
+    } else erro('sem conexão com o Apps Script');
+  }
+
+  function atualizar() {
+    var b = $('btnAtualizar'), m = $('msg');
+    b.disabled = true; m.className = 'msg'; m.textContent = 'Lendo as planilhas de origem…';
+    $('app').classList.add('loading');
+    var ok = function (r) {
+      m.textContent = 'Atualizado em ' + nf1.format(r.duracao_s) + ' s · ' + nf0.format(r.stats.manut_gravadas) + ' manutenções · ' + nf0.format(r.pendencias) + ' pendência(s).';
+      b.disabled = false; buscar();
+    };
+    if (window.google && google.script && google.script.run) google.script.run.withSuccessHandler(ok).withFailureHandler(erro).atualizarDados();
+    else setTimeout(function () { ok({ duracao_s: 0.1, stats: { manut_gravadas: DADOS ? DADOS.manutencoes.length : 0 }, pendencias: DADOS ? DADOS.pendencias : 0 }); }, 400);
+  }
+
+  /* ---------- eventos ---------- */
+  ['fPeriodo', 'fCategoria', 'fEquip', 'fGrupo', 'fNatureza', 'fAnterior'].forEach(function (id) { $(id).addEventListener('change', render); });
+  $('selKm').addEventListener('change', function () { temaChart(); graficoKm(); });
+  $('busca').addEventListener('input', function () { tabelaDetalhe(filtradas()); });
+  $('btnAtualizar').addEventListener('click', atualizar);
+  document.querySelectorAll('button.seg').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var k = b.dataset.gran ? 'gran' : b.dataset.met ? 'met' : 'stack';
+      ui[k] = b.dataset[k];
+      b.parentNode.querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+      temaChart(); barras(filtradas());
+    });
+  });
+  if (window.matchMedia) window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', render);
+
+  buscar();
+})();
+</script>
+</body>
+</html>

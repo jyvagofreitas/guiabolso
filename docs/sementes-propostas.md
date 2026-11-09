@@ -1,7 +1,7 @@
 # Etapas 1 e 2: diagnóstico e sementes propostas
 
 > Gerado em 09/11/2026 a partir das planilhas de origem (somente leitura).
-> **Status: aguardando aprovação.** Nada foi criado no Google Drive ainda.
+> **Status: aprovado em 09/11/2026** (Fuji ativa; histórico do Pajero como "dono anterior"; 4 tênis ativos). Gravado na planilha "Manutenção – Modelo de Dados".
 
 ---
 

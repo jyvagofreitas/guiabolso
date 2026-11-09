@@ -1,0 +1,1509 @@
+{
+ "dim_equipamento": [
+  [
+   "equip_id",
+   "nome_canonico",
+   "categoria",
+   "subtipo",
+   "marca",
+   "modelo",
+   "data_aquisicao",
+   "valor_aquisicao",
+   "data_baixa",
+   "status",
+   "fonte_km",
+   "equip_pai_id",
+   "rastrear_manutencao",
+   "vida_util_km"
+  ],
+  [
+   "MOTO-HIMALAYAN",
+   "Himalayan 411",
+   "Veículo",
+   "Moto",
+   "Royal Enfield",
+   "Himalayan 411",
+   "22/01/2020",
+   "",
+   "",
+   "Ativo",
+   "hodometro",
+   "",
+   "S",
+   ""
+  ],
+  [
+   "CARRO-TR4",
+   "Pajero TR4 2010",
+   "Veículo",
+   "Carro",
+   "Mitsubishi",
+   "Pajero TR4 2010",
+   "13/04/2026",
+   "",
+   "",
+   "Ativo",
+   "hodometro",
+   "",
+   "S",
+   ""
+  ],
+  [
+   "BIKE-CHISEL",
+   "CHISEL",
+   "Bicicleta",
+   "MTB",
+   "Specialized",
+   "Chisel",
+   "22/01/2021",
+   "",
+   "",
+   "Ativo",
+   "strava",
+   "",
+   "S",
+   ""
+  ],
+  [
+   "BIKE-TRICROSS",
+   "Tricross",
+   "Bicicleta",
+   "Gravel/Ciclocross",
+   "Specialized",
+   "Tricross",
+   "23/09/2016",
+   5000,
+   "",
+   "Ativo",
+   "strava",
+   "",
+   "S",
+   ""
+  ],
+  [
+   "BIKE-FUJI",
+   "PRO – Carbono Aro 26",
+   "Bicicleta",
+   "MTB",
+   "Fuji",
+   "MTB PRO",
+   "",
+   "",
+   "",
+   "Ativo",
+   "strava",
+   "",
+   "S",
+   ""
+  ],
+  [
+   "TENIS-FIRE",
+   "Fila Fire",
+   "Calçado",
+   "Tênis corrida",
+   "Fila",
+   "Fire",
+   "16/08/2024",
+   199,
+   "",
+   "Ativo",
+   "strava",
+   "",
+   "S",
+   700
+  ],
+  [
+   "TENIS-SHINOBI",
+   "ASICS Gel Shinobi",
+   "Calçado",
+   "Tênis corrida",
+   "ASICS",
+   "Gel Shinobi",
+   "28/01/2023",
+   "",
+   "",
+   "Ativo",
+   "strava",
+   "",
+   "S",
+   700
+  ],
+  [
+   "TENIS-KIPRUN",
+   "Kiprun TR",
+   "Calçado",
+   "Tênis trail",
+   "Kalenji/Evadict",
+   "Kiprun TR",
+   "28/01/2023",
+   "",
+   "",
+   "Ativo",
+   "strava",
+   "",
+   "S",
+   700
+  ],
+  [
+   "TENIS-ULTRARANGE",
+   "Vans Ultrarange Neo VR3",
+   "Calçado",
+   "Tênis casual",
+   "Vans",
+   "Ultrarange Neo VR3",
+   "17/01/2025",
+   630,
+   "",
+   "Ativo",
+   "strava",
+   "",
+   "S",
+   700
+  ],
+  [
+   "CASA-BANHEIRO",
+   "Banheiro",
+   "Casa",
+   "Hidráulica",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "Ativo",
+   "nenhuma",
+   "",
+   "S",
+   ""
+  ],
+  [
+   "ACC-CAP-AEROFIT",
+   "Capacete Aerofit 900 Noir",
+   "Acessório ciclismo",
+   "Capacete",
+   "Decathlon",
+   "",
+   "11/02/2023",
+   250,
+   "",
+   "Ativo",
+   "nenhuma",
+   "",
+   "N",
+   ""
+  ],
+  [
+   "ACC-CAP-POLISPORT",
+   "Capacete Polisport Light Road",
+   "Acessório ciclismo",
+   "Capacete",
+   "Polisport",
+   "Light road",
+   "11/10/2023",
+   280,
+   "",
+   "Ativo",
+   "nenhuma",
+   "",
+   "N",
+   ""
+  ],
+  [
+   "ACC-CICLO-IGS620",
+   "Ciclocomputador IGS620",
+   "Acessório ciclismo",
+   "Ciclocomputador",
+   "IGPSPORT",
+   "620",
+   "15/01/2021",
+   989,
+   "",
+   "Ativo",
+   "nenhuma",
+   "",
+   "N",
+   ""
+  ],
+  [
+   "ACC-CICLO-BSC300",
+   "Ciclocomputador BSC 300",
+   "Acessório ciclismo",
+   "Ciclocomputador",
+   "IGPSPORT",
+   "BSC 300",
+   "28/04/2024",
+   870,
+   "",
+   "Ativo",
+   "nenhuma",
+   "",
+   "N",
+   ""
+  ],
+  [
+   "ACC-CINTA-HR40",
+   "Cinta cardíaca HR40",
+   "Acessório ciclismo",
+   "Sensor",
+   "IGPSPORT",
+   "HR40",
+   "31/01/2023",
+   269,
+   "",
+   "Ativo",
+   "nenhuma",
+   "",
+   "N",
+   ""
+  ],
+  [
+   "ACC-OCULOS-OAKLEY",
+   "Oakley Flak 2.0 XL",
+   "Acessório ciclismo",
+   "Óculos",
+   "Oakley",
+   "Flak 2.0 9188 F359",
+   "11/10/2023",
+   650,
+   "",
+   "Ativo",
+   "nenhuma",
+   "",
+   "N",
+   ""
+  ],
+  [
+   "ACC-MOCHILA-USWE",
+   "Mochila hidratação USWE Epic 8",
+   "Acessório ciclismo",
+   "Mochila",
+   "USWE",
+   "EPIC 8 3L",
+   "02/02/2023",
+   1044,
+   "",
+   "Ativo",
+   "nenhuma",
+   "",
+   "N",
+   ""
+  ],
+  [
+   "ACC-CAP-BELL-2020",
+   "Capacete Bell MX-9 Adventure MIPS",
+   "Acessório moto",
+   "Capacete",
+   "Bell",
+   "MX-9 Adventure MIPS",
+   "25/01/2020",
+   759,
+   "",
+   "Ativo",
+   "nenhuma",
+   "MOTO-HIMALAYAN",
+   "N",
+   ""
+  ],
+  [
+   "ACC-CAP-BELL-2025",
+   "Capacete Bell MX-9 Stealth Camo",
+   "Acessório moto",
+   "Capacete",
+   "Bell",
+   "MX-9 Adventure MIPS Stealth",
+   "07/02/2025",
+   768,
+   "",
+   "Ativo",
+   "nenhuma",
+   "MOTO-HIMALAYAN",
+   "N",
+   ""
+  ],
+  [
+   "ACC-CAP-HJC",
+   "Capacete HJC CS 15 Kane",
+   "Acessório moto",
+   "Capacete",
+   "HJC",
+   "CS 15",
+   "09/08/2021",
+   630,
+   "",
+   "Ativo",
+   "nenhuma",
+   "MOTO-HIMALAYAN",
+   "N",
+   ""
+  ],
+  [
+   "ACC-JAQ-X11",
+   "Jaqueta X-11 Summer Pro",
+   "Acessório moto",
+   "Jaqueta",
+   "X-11",
+   "Summer Pro",
+   "21/02/2020",
+   565,
+   "",
+   "Ativo",
+   "nenhuma",
+   "MOTO-HIMALAYAN",
+   "N",
+   ""
+  ],
+  [
+   "ACC-JAQ-ALPINESTARS",
+   "Jaqueta Alpinestars Headlands Drystar",
+   "Acessório moto",
+   "Jaqueta",
+   "Alpinestars",
+   "Drystar Asphalt",
+   "09/08/2021",
+   1530,
+   "",
+   "Ativo",
+   "nenhuma",
+   "MOTO-HIMALAYAN",
+   "N",
+   ""
+  ],
+  [
+   "ACC-JAQ-TEXX",
+   "Jaqueta Texx Storm",
+   "Acessório moto",
+   "Jaqueta",
+   "Texx",
+   "Storm",
+   "29/08/2023",
+   900,
+   "",
+   "Ativo",
+   "nenhuma",
+   "MOTO-HIMALAYAN",
+   "N",
+   ""
+  ],
+  [
+   "TREK-BARRACA",
+   "Barraca Naturehike Mongar",
+   "Trekking",
+   "Barraca",
+   "Naturehike",
+   "Mongar",
+   "18/06/2021",
+   1459,
+   "",
+   "Ativo",
+   "nenhuma",
+   "",
+   "N",
+   ""
+  ],
+  [
+   "TREK-MOCHILA-DEUTER",
+   "Mochila Deuter Alpamayo 55+10",
+   "Trekking",
+   "Mochila",
+   "Deuter",
+   "Alpamayo 55+10",
+   "26/06/2021",
+   952,
+   "",
+   "Ativo",
+   "nenhuma",
+   "",
+   "N",
+   ""
+  ],
+  [
+   "TREK-MOCHILA-NH500",
+   "Mochila Quechua NH500 20L",
+   "Trekking",
+   "Mochila",
+   "Decathlon",
+   "NH500 20L",
+   "19/11/2020",
+   250,
+   "",
+   "Ativo",
+   "strava",
+   "",
+   "N",
+   ""
+  ],
+  [
+   "ELE-RELOGIO-GTR4",
+   "Amazfit GTR4",
+   "Eletrônico",
+   "Relógio",
+   "Amazfit",
+   "GTR4",
+   "02/09/2023",
+   970,
+   "",
+   "Ativo",
+   "nenhuma",
+   "",
+   "N",
+   ""
+  ],
+  [
+   "ELE-ALEXA",
+   "Alexa Echo Dot 3",
+   "Eletrônico",
+   "Assistente virtual",
+   "Amazon",
+   "Echo dot 3 ger",
+   "25/01/2022",
+   271,
+   "",
+   "Ativo",
+   "nenhuma",
+   "",
+   "N",
+   ""
+  ],
+  [
+   "ELE-JBL-FLIP3",
+   "JBL Flip 3",
+   "Eletrônico",
+   "Caixa de som",
+   "JBL",
+   "Flip 3",
+   "29/01/2017",
+   380,
+   "",
+   "Ativo",
+   "nenhuma",
+   "",
+   "N",
+   ""
+  ],
+  [
+   "ELE-GOPRO",
+   "GoPro Hero 3 Black",
+   "Eletrônico",
+   "Câmera de ação",
+   "GoPro",
+   "Hero 3 Black",
+   "01/07/2021",
+   500,
+   "",
+   "Ativo",
+   "nenhuma",
+   "",
+   "N",
+   ""
+  ],
+  [
+   "ELE-CELULAR",
+   "Motorola Edge 40 Neo",
+   "Eletrônico",
+   "Celular",
+   "Motorola",
+   "Edge 40 neo",
+   "31/05/2024",
+   904,
+   "",
+   "Ativo",
+   "nenhuma",
+   "",
+   "N",
+   ""
+  ],
+  [
+   "ELE-AIRPODS",
+   "AirPods Pro 2",
+   "Eletrônico",
+   "Fone de ouvido",
+   "Apple",
+   "Airpod pro 2",
+   "27/02/2024",
+   1530,
+   "",
+   "Ativo",
+   "nenhuma",
+   "",
+   "N",
+   ""
+  ],
+  [
+   "ELE-MONITOR",
+   "Monitor Philco",
+   "Eletrônico",
+   "Monitor",
+   "Philco",
+   "",
+   "26/04/2020",
+   600,
+   "",
+   "Ativo",
+   "nenhuma",
+   "",
+   "N",
+   ""
+  ],
+  [
+   "ELE-SOUNDBAR",
+   "JBL SB180",
+   "Eletrônico",
+   "Soundbar",
+   "JBL",
+   "SB180",
+   "22/02/2024",
+   1049,
+   "",
+   "Ativo",
+   "nenhuma",
+   "",
+   "N",
+   ""
+  ],
+  [
+   "ELE-TV",
+   "TV LG 49\" 4K",
+   "Eletrônico",
+   "TV",
+   "LG",
+   "LED UHD 4K",
+   "23/01/2019",
+   2399,
+   "",
+   "Ativo",
+   "nenhuma",
+   "",
+   "N",
+   ""
+  ],
+  [
+   "ELE-WEBCAM",
+   "Webcam Intelbras 1080p",
+   "Eletrônico",
+   "Webcam",
+   "Intelbras",
+   "",
+   "29/08/2023",
+   239,
+   "",
+   "Ativo",
+   "nenhuma",
+   "",
+   "N",
+   ""
+  ],
+  [
+   "CASA-AR-COND",
+   "Ar-condicionado Springer Midea 9000",
+   "Casa",
+   "Ar condicionado",
+   "Springer Midea",
+   "",
+   "11/02/2017",
+   999,
+   "",
+   "Ativo",
+   "nenhuma",
+   "",
+   "N",
+   ""
+  ],
+  [
+   "CASA-CADEIRA-2020",
+   "Cadeira Home Office",
+   "Casa",
+   "Cadeira",
+   "",
+   "",
+   "26/04/2020",
+   580,
+   "",
+   "Baixado",
+   "nenhuma",
+   "",
+   "N",
+   ""
+  ],
+  [
+   "CASA-CADEIRA-TOKSTOK",
+   "Cadeira Home Office Tok & Stok",
+   "Casa",
+   "Cadeira",
+   "Tok & Stok",
+   "WEB",
+   "08/05/2025",
+   711,
+   "",
+   "Ativo",
+   "nenhuma",
+   "",
+   "N",
+   ""
+  ],
+  [
+   "CASA-CAFETEIRA",
+   "Nespresso Vertuo POP",
+   "Casa",
+   "Cafeteira",
+   "Nespresso",
+   "Vertuo POP",
+   "27/11/2023",
+   489,
+   "",
+   "Ativo",
+   "nenhuma",
+   "",
+   "N",
+   ""
+  ],
+  [
+   "CASA-ESCOVA",
+   "Escova elétrica Oral-B",
+   "Casa",
+   "Escova de dente",
+   "Oral B",
+   "",
+   "04/02/2025",
+   109,
+   "",
+   "Ativo",
+   "nenhuma",
+   "",
+   "N",
+   ""
+  ],
+  [
+   "CASA-PANELA",
+   "Panela de pressão Brinox 4,2L",
+   "Casa",
+   "Panela de pressão",
+   "Brinox",
+   "Ceramic Life Pressure",
+   "17/02/2025",
+   299,
+   "",
+   "Ativo",
+   "nenhuma",
+   "",
+   "N",
+   ""
+  ],
+  [
+   "CASA-SOFA",
+   "Sofá-cama Guest 3 lugares",
+   "Casa",
+   "Sofá",
+   "Tok & Stok",
+   "Guest",
+   "27/01/2025",
+   2499,
+   "",
+   "Ativo",
+   "nenhuma",
+   "",
+   "N",
+   ""
+  ],
+  [
+   "VEST-RAYBAN",
+   "Ray-Ban Wayfarer",
+   "Vestuário",
+   "Óculos de sol",
+   "Ray-Ban",
+   "RB2140 901 50",
+   "23/11/2023",
+   790,
+   "",
+   "Ativo",
+   "nenhuma",
+   "",
+   "N",
+   ""
+  ],
+  [
+   "VEST-FILA-ACD-BRANCO",
+   "Fila ACD Classic Mid Branco",
+   "Vestuário",
+   "Tênis casual",
+   "Fila",
+   "Classic Mid",
+   "07/12/2024",
+   314.93,
+   "",
+   "Baixado",
+   "nenhuma",
+   "",
+   "N",
+   ""
+  ],
+  [
+   "VEST-FILA-ACD-VERMELHO",
+   "Fila ACD Classic SE Vermelho",
+   "Vestuário",
+   "Tênis casual",
+   "Fila",
+   "ACD Classic SE",
+   "17/12/2024",
+   220,
+   "",
+   "Ativo",
+   "nenhuma",
+   "",
+   "N",
+   ""
+  ],
+  [
+   "VEST-FILA-FX100",
+   "Fila FX-100 All Terrain Low",
+   "Vestuário",
+   "Tênis casual",
+   "Fila",
+   "FX-100 All Terrain Low",
+   "17/12/2024",
+   345.21,
+   "",
+   "Ativo",
+   "nenhuma",
+   "",
+   "N",
+   ""
+  ],
+  [
+   "VEST-FILA-ACD-PRETO",
+   "Fila ACD Mid Preto/Branco",
+   "Vestuário",
+   "Tênis casual",
+   "Fila",
+   "ACD Mid",
+   "12/03/2025",
+   "",
+   "",
+   "Ativo",
+   "nenhuma",
+   "",
+   "N",
+   ""
+  ]
+ ],
+ "de_para_nomes": [
+  [
+   "nome_origem",
+   "origem",
+   "equip_id"
+  ],
+  [
+   "Himalayan 411",
+   "*",
+   "MOTO-HIMALAYAN"
+  ],
+  [
+   "Bomba de combustível",
+   "*",
+   "MOTO-HIMALAYAN"
+  ],
+  [
+   "Pajero TR4 2010",
+   "*",
+   "CARRO-TR4"
+  ],
+  [
+   "CHISEL",
+   "*",
+   "BIKE-CHISEL"
+  ],
+  [
+   "Tricross",
+   "*",
+   "BIKE-TRICROSS"
+  ],
+  [
+   "PRO - CARBONO - ARO 26",
+   "*",
+   "BIKE-FUJI"
+  ],
+  [
+   "Fire",
+   "manutencoes",
+   "TENIS-FIRE"
+  ],
+  [
+   "Fila fire Fire",
+   "strava",
+   "TENIS-FIRE"
+  ],
+  [
+   "Shinobi",
+   "manutencoes",
+   "TENIS-SHINOBI"
+  ],
+  [
+   "ASICS Gel-shinobi Shinobi",
+   "strava",
+   "TENIS-SHINOBI"
+  ],
+  [
+   "KIPRUN TR",
+   "manutencoes",
+   "TENIS-KIPRUN"
+  ],
+  [
+   "Kalenji evadic KIPRUN TR",
+   "strava",
+   "TENIS-KIPRUN"
+  ],
+  [
+   "Ultrarange Neo Vr3 Mte Navy True Blue",
+   "manutencoes",
+   "TENIS-ULTRARANGE"
+  ],
+  [
+   "Vans Ultrarange Neo Vr3",
+   "strava",
+   "TENIS-ULTRARANGE"
+  ],
+  [
+   "Backpack NH500 20L GREY",
+   "manutencoes",
+   "TREK-MOCHILA-NH500"
+  ],
+  [
+   "Quechua NH 500 NH500",
+   "strava",
+   "TREK-MOCHILA-NH500"
+  ],
+  [
+   "Kit Completo caixa acoplada do vaso",
+   "manutencoes",
+   "CASA-BANHEIRO"
+  ],
+  [
+   "Capacete aerofit 900 noir",
+   "manutencoes",
+   "ACC-CAP-AEROFIT"
+  ],
+  [
+   "Capacete Polisport light road",
+   "manutencoes",
+   "ACC-CAP-POLISPORT"
+  ],
+  [
+   "IGS620",
+   "manutencoes",
+   "ACC-CICLO-IGS620"
+  ],
+  [
+   "BSC 300",
+   "manutencoes",
+   "ACC-CICLO-BSC300"
+  ],
+  [
+   "Cinta cardíaca HR 40",
+   "manutencoes",
+   "ACC-CINTA-HR40"
+  ],
+  [
+   "OAKLEY Flak 2.0 XL",
+   "manutencoes",
+   "ACC-OCULOS-OAKLEY"
+  ],
+  [
+   "USWE EPIC 8 3L",
+   "manutencoes",
+   "ACC-MOCHILA-USWE"
+  ],
+  [
+   "Capacete BELL MX-9 ADVENTURE MIPS",
+   "manutencoes",
+   "ACC-CAP-BELL-2020"
+  ],
+  [
+   "Capacete BELL MX-9 ADVENTURE MIPS Stealth Camo Black Hi",
+   "manutencoes",
+   "ACC-CAP-BELL-2025"
+  ],
+  [
+   "Capacete HJC CS 15 KANE CINZA",
+   "manutencoes",
+   "ACC-CAP-HJC"
+  ],
+  [
+   "Jaqueta X-11 SUMMER PRO",
+   "manutencoes",
+   "ACC-JAQ-X11"
+  ],
+  [
+   "Jaqueta ALPINESTARS HEADLANDS DRYSTAR ASPHALT",
+   "manutencoes",
+   "ACC-JAQ-ALPINESTARS"
+  ],
+  [
+   "Jaqueta TEXX STORM",
+   "manutencoes",
+   "ACC-JAQ-TEXX"
+  ],
+  [
+   "Naturehike mongar",
+   "manutencoes",
+   "TREK-BARRACA"
+  ],
+  [
+   "Deuter Alpamayo 55+10",
+   "manutencoes",
+   "TREK-MOCHILA-DEUTER"
+  ],
+  [
+   "GTR4",
+   "manutencoes",
+   "ELE-RELOGIO-GTR4"
+  ],
+  [
+   "Alexa",
+   "manutencoes",
+   "ELE-ALEXA"
+  ],
+  [
+   "JBL FLIP 3",
+   "manutencoes",
+   "ELE-JBL-FLIP3"
+  ],
+  [
+   "Gopro hero 3 black",
+   "manutencoes",
+   "ELE-GOPRO"
+  ],
+  [
+   "Edge 40 neo",
+   "manutencoes",
+   "ELE-CELULAR"
+  ],
+  [
+   "Airpod pro 2",
+   "manutencoes",
+   "ELE-AIRPODS"
+  ],
+  [
+   "Monitor de TV Philco para PC",
+   "manutencoes",
+   "ELE-MONITOR"
+  ],
+  [
+   "JBL SB180",
+   "manutencoes",
+   "ELE-SOUNDBAR"
+  ],
+  [
+   "TV 49\" LED UHD 4K",
+   "manutencoes",
+   "ELE-TV"
+  ],
+  [
+   "Web cam 1080 p usb intelbrás",
+   "manutencoes",
+   "ELE-WEBCAM"
+  ],
+  [
+   "Springer Midea 9000",
+   "manutencoes",
+   "CASA-AR-COND"
+  ],
+  [
+   "Cadeira Home Office",
+   "manutencoes",
+   "CASA-CADEIRA-2020"
+  ],
+  [
+   "Cadeira Home Office Tok & Stok",
+   "manutencoes",
+   "CASA-CADEIRA-TOKSTOK"
+  ],
+  [
+   "Nespresso Vertuo POP Yellow",
+   "manutencoes",
+   "CASA-CAFETEIRA"
+  ],
+  [
+   "Elétrica",
+   "manutencoes",
+   "CASA-ESCOVA"
+  ],
+  [
+   "Brinox Cinza Grafite Granito Ceramic Life Pressure 4,2L",
+   "manutencoes",
+   "CASA-PANELA"
+  ],
+  [
+   "Sofá-cama Guest 3 lugares cinza",
+   "manutencoes",
+   "CASA-SOFA"
+  ],
+  [
+   "Ray-Ban way farer",
+   "manutencoes",
+   "VEST-RAYBAN"
+  ],
+  [
+   "ACD CLASSIC MID Branco",
+   "manutencoes",
+   "VEST-FILA-ACD-BRANCO"
+  ],
+  [
+   "Acd Classic Se VERMELHO",
+   "manutencoes",
+   "VEST-FILA-ACD-VERMELHO"
+  ],
+  [
+   "FX-100 ALL TERRAIN LOW BRANCO",
+   "manutencoes",
+   "VEST-FILA-FX100"
+  ],
+  [
+   "Fila ACD MID MASCULINO PRETO/BRANCO",
+   "manutencoes",
+   "VEST-FILA-ACD-PRETO"
+  ]
+ ],
+ "dim_servico": [
+  [
+   "ordem",
+   "servico_id",
+   "descricao_padrao",
+   "componente",
+   "natureza",
+   "padroes_texto"
+  ],
+  [
+   1,
+   "S-OLEO-FILTRO",
+   "Filtro de óleo",
+   "Motor / Óleo",
+   "Preventiva",
+   "filtro de oleo; filtro oleo"
+  ],
+  [
+   2,
+   "S-OLEO-MOTOR",
+   "Troca de óleo do motor",
+   "Motor / Óleo",
+   "Preventiva",
+   "oleo motor"
+  ],
+  [
+   3,
+   "S-ARRUELA",
+   "Arruela do parafuso de inspeção",
+   "Motor / Óleo",
+   "Preventiva",
+   "arruela"
+  ],
+  [
+   4,
+   "S-FILTRO-AR",
+   "Filtro de ar",
+   "Motor / Óleo",
+   "Preventiva",
+   "filtro de ar; filtro k & n; filtro k&n"
+  ],
+  [
+   5,
+   "S-DESCARBON",
+   "Descarbonizante",
+   "Motor / Óleo",
+   "Preventiva",
+   "descarbonizante"
+  ],
+  [
+   6,
+   "S-VELA",
+   "Vela de ignição",
+   "Motor / Ignição e válvulas",
+   "Preventiva",
+   "vela de ignicao"
+  ],
+  [
+   7,
+   "S-VALVULAS",
+   "Regulagem de válvulas",
+   "Motor / Ignição e válvulas",
+   "Preventiva",
+   "regular valvulas"
+  ],
+  [
+   8,
+   "S-MOTOR-REPARO",
+   "Reparo de motor",
+   "Motor / Reparo",
+   "Corretiva",
+   "junta cabecote; retifica; troca de valvula; sensor de rotacao; bujao supressor"
+  ],
+  [
+   9,
+   "S-CORREIA",
+   "Correia dentada",
+   "Motor / Inspeção",
+   "Inspeção",
+   "correia dentada"
+  ],
+  [
+   10,
+   "S-LUBRIF",
+   "Lubrificação da transmissão",
+   "Transmissão",
+   "Preventiva",
+   "kit lubrificacao; graxa"
+  ],
+  [
+   11,
+   "S-RELACAO",
+   "Relação (coroa, corrente e pinhão)",
+   "Transmissão",
+   "Preventiva",
+   "relacao"
+  ],
+  [
+   12,
+   "S-MEDICAO-CORRENTE",
+   "Medição de corrente",
+   "Transmissão",
+   "Inspeção",
+   "medicao de corrente"
+  ],
+  [
+   13,
+   "S-CORRENTE",
+   "Troca de corrente",
+   "Transmissão",
+   "Preventiva",
+   "troca corrente"
+  ],
+  [
+   14,
+   "S-CASSETE",
+   "Cassete / coroa",
+   "Transmissão",
+   "Preventiva",
+   "cassete; troca coroa"
+  ],
+  [
+   15,
+   "S-CAMBIO",
+   "Câmbio",
+   "Transmissão",
+   "Corretiva",
+   "cambio"
+  ],
+  [
+   16,
+   "S-EMBREAGEM",
+   "Cabo de embreagem",
+   "Transmissão",
+   "Corretiva",
+   "embreagem"
+  ],
+  [
+   17,
+   "S-SELANTE",
+   "Selante dos pneus",
+   "Pneus",
+   "Preventiva",
+   "liquido; vacina"
+  ],
+  [
+   18,
+   "S-PNEU-REPARO",
+   "Câmara / remendo",
+   "Pneus",
+   "Corretiva",
+   "camera; camara; remendo"
+  ],
+  [
+   19,
+   "S-PNEU",
+   "Troca de pneu",
+   "Pneus",
+   "Preventiva",
+   "troca dos pneus; troca pneu; pneu traseiro; pneu dianteiro"
+  ],
+  [
+   20,
+   "S-ALINHAMENTO",
+   "Alinhamento / balanceamento",
+   "Rodas",
+   "Preventiva",
+   "balancea; alinhamento; cambagem; desempeno"
+  ],
+  [
+   21,
+   "S-PROTETOR-ARO",
+   "Protetor de aro",
+   "Rodas",
+   "Upgrade",
+   "protetor de aro"
+  ],
+  [
+   22,
+   "S-CUBO",
+   "Rolamentos do cubo",
+   "Rodas",
+   "Corretiva",
+   "freehub"
+  ],
+  [
+   23,
+   "S-SUSP-REPARO",
+   "Reparo de suspensão",
+   "Suspensão",
+   "Corretiva",
+   "embolo; amortecedor; coxim; coifa"
+  ],
+  [
+   24,
+   "S-SUSP",
+   "Revisão de suspensão",
+   "Suspensão",
+   "Preventiva",
+   "suspensao"
+  ],
+  [
+   25,
+   "S-PASTILHA",
+   "Pastilha de freio",
+   "Freios",
+   "Preventiva",
+   "pastilha"
+  ],
+  [
+   26,
+   "S-FLUIDO-FREIO",
+   "Fluido de freio",
+   "Freios",
+   "Preventiva",
+   "dot 4"
+  ],
+  [
+   27,
+   "S-DISCO",
+   "Disco de freio",
+   "Freios",
+   "Corretiva",
+   "disco"
+  ],
+  [
+   28,
+   "S-DIRECAO",
+   "Caixa de direção",
+   "Direção",
+   "Preventiva",
+   "caixa de direcao"
+  ],
+  [
+   29,
+   "S-BATERIA",
+   "Bateria",
+   "Elétrica",
+   "Corretiva",
+   "bateria"
+  ],
+  [
+   30,
+   "S-ELETRICA",
+   "Reparo elétrico",
+   "Elétrica",
+   "Corretiva",
+   "fusivel; setas; lampada; milha"
+  ],
+  [
+   31,
+   "S-COMBUSTIVEL",
+   "Sistema de combustível",
+   "Combustível",
+   "Corretiva",
+   "bomba de combustivel; canister"
+  ],
+  [
+   32,
+   "S-ESCAPAMENTO",
+   "Escapamento",
+   "Carroceria / Acessórios",
+   "Upgrade",
+   "escapamento"
+  ],
+  [
+   33,
+   "S-ACESSORIOS",
+   "Acessórios / carroceria",
+   "Carroceria / Acessórios",
+   "Upgrade",
+   "bolha; descanso; guidao; pelicula; polimento"
+  ],
+  [
+   34,
+   "S-REVISAO",
+   "Revisão geral",
+   "Revisão geral",
+   "Preventiva",
+   "revisao geral"
+  ],
+  [
+   35,
+   "S-MAO-OBRA",
+   "Mão de obra mecânica",
+   "Revisão geral",
+   "Preventiva",
+   "mao de obra"
+  ],
+  [
+   36,
+   "S-HIDRAULICA",
+   "Hidráulica",
+   "Hidráulica",
+   "Corretiva",
+   "caixa acoplada"
+  ]
+ ],
+ "plano_manutencao": [
+  [
+   "alvo",
+   "componente",
+   "servicos",
+   "intervalo_km",
+   "intervalo_dias",
+   "observacao"
+  ],
+  [
+   "MOTO-HIMALAYAN",
+   "Óleo + filtro",
+   "S-OLEO-MOTOR; S-OLEO-FILTRO",
+   5000,
+   180,
+   "histórico: troca a cada ~5–7 mil km"
+  ],
+  [
+   "MOTO-HIMALAYAN",
+   "Lubrificação da corrente",
+   "S-LUBRIF",
+   5000,
+   180,
+   "histórico"
+  ],
+  [
+   "MOTO-HIMALAYAN",
+   "Válvulas",
+   "S-VALVULAS",
+   10000,
+   365,
+   "histórico"
+  ],
+  [
+   "MOTO-HIMALAYAN",
+   "Vela de ignição",
+   "S-VELA",
+   10000,
+   730,
+   ""
+  ],
+  [
+   "MOTO-HIMALAYAN",
+   "Óleo da suspensão",
+   "S-SUSP",
+   20000,
+   730,
+   ""
+  ],
+  [
+   "MOTO-HIMALAYAN",
+   "Fluido de freio",
+   "S-FLUIDO-FREIO",
+   "",
+   730,
+   ""
+  ],
+  [
+   "MOTO-HIMALAYAN",
+   "Relação",
+   "S-RELACAO",
+   20000,
+   "",
+   ""
+  ],
+  [
+   "MOTO-HIMALAYAN",
+   "Pneus",
+   "S-PNEU",
+   20000,
+   "",
+   ""
+  ],
+  [
+   "CARRO-TR4",
+   "Óleo + filtros",
+   "S-OLEO-MOTOR; S-OLEO-FILTRO; S-FILTRO-AR",
+   10000,
+   365,
+   ""
+  ],
+  [
+   "CARRO-TR4",
+   "Alinhamento / balanceamento",
+   "S-ALINHAMENTO",
+   10000,
+   365,
+   ""
+  ],
+  [
+   "CARRO-TR4",
+   "Correia dentada",
+   "S-CORREIA",
+   60000,
+   1460,
+   "conferir no manual"
+  ],
+  [
+   "Bicicleta",
+   "Selante dos pneus",
+   "S-SELANTE",
+   "",
+   120,
+   ""
+  ],
+  [
+   "Bicicleta",
+   "Revisão geral",
+   "S-REVISAO",
+   3000,
+   365,
+   ""
+  ],
+  [
+   "MTB",
+   "Revisão de suspensão",
+   "S-SUSP; S-SUSP-REPARO",
+   3000,
+   365,
+   ""
+  ],
+  [
+   "Bicicleta",
+   "Corrente",
+   "S-CORRENTE; S-MEDICAO-CORRENTE; S-RELACAO",
+   2000,
+   "",
+   ""
+  ],
+  [
+   "Bicicleta",
+   "Pneu",
+   "S-PNEU",
+   3000,
+   "",
+   ""
+  ],
+  [
+   "Bicicleta",
+   "Pastilhas de freio",
+   "S-PASTILHA",
+   2000,
+   "",
+   ""
+  ]
+ ]
+}
